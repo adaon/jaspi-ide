@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Jaspi IDE</title>
+        <meta charset="utf-8">
+        
+        <script src="/jaspi/js/jaspi.js"></script>
+        
+        <style>
+            body {
+                background-color: #333333;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <script>
+            jaspi.auth.require(function (user) {
+                jaspi.slots.app().call('getContent', function (content) {
+                    //console.log(content);
+                    if (content) {
+                        $('html').html(content);
+                    } else {
+                        jaspi.auth.logout(function () {
+                            location.href = location.href;
+                        });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
